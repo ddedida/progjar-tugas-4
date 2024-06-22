@@ -3,8 +3,9 @@ import socket
 import json
 import base64
 import logging
+import struct
 
-server_address = ('0.0.0.0', 6666)
+server_address = ('0.0.0.0', 8889)
 
 def send_command(command_str=""):
     global server_address
@@ -12,7 +13,12 @@ def send_command(command_str=""):
     sock.connect(server_address)
     logging.warning(f"connecting to {server_address}")
     try:
-        sock.sendall(command_str.encode())
+        command_bytes = command_str.encode()
+        command_length = struct.pack('!I', len(command_bytes))
+
+        sock.sendall(command_length)
+        sock.sendall(command_bytes)
+
         data_received = b""
         while True:
             data = sock.recv(4096)
@@ -28,6 +34,8 @@ def send_command(command_str=""):
     except Exception as e:
         logging.warning(f"error during data receiving: {str(e)}")
         return False
+    finally:
+        sock.close()
 
 def remote_list():
     command_str = f"LIST"
@@ -89,10 +97,11 @@ def remote_delete(filename=""):
         return False
 
 if __name__ == '__main__':
-    server_address = ('0.0.0.0', 6666)
+    server_address = ('0.0.0.0', 8889)
     # remote_upload('donalbebek.jpg')
-    remote_upload('ppl.png') # GAK BISA KOCAK AOWKOAWKOAWK
+    # remote_upload('rfc2616.pdf')
     # remote_list()
     # remote_get('donalbebek.jpg')
     # remote_get('rfc2616.pdf')
     # remote_delete('donalbebek.jpg')
+    # remote_delete('rfc2616.pdf')
