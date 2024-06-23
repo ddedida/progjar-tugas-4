@@ -29,13 +29,37 @@ LIST
 GET
 * TUJUAN: untuk mendapatkan isi file dengan menyebutkan nama file dalam parameter
 * PARAMETER:
-  - PARAMETER1 : nama file
+  - PARAMETER1: nama file
 * RESULT:
 - BERHASIL:
   - status: OK
-  - data_namafile : nama file yang diminta
-  - data_file : isi file yang diminta (dalam bentuk base64)
+  - data_namafile: nama file yang diminta
+  - data_file: isi file yang diminta (dalam bentuk base64)
 - GAGAL:
   - status: ERROR
   - data: pesan kesalahan
 
+UPLOAD
+* TUJUAN: untuk mengunggah isi file beserta namanya dengan menyebutkan nama file dalam parameter
+* PARAMETER:
+  - PARAMETER1: nama file
+* RESULT:
+- BERHASIL:
+  - status: OK
+  - data_namafile: nama file yang dikirim
+  - data_file: isi file yang dikirim (dalam bentuk base64)
+- GAGAL:
+  - status: ERROR
+  - data: pesan kesalahan
+
+delete
+* TUJUAN: untuk menghapus file di dalam server dengan menyebutkan nama file dalamm parameter
+* PARAMETER:
+  - PARAMETER1: nama file
+* RESULT:
+- BERHASIL:
+  - status: OK
+  - data: pesan berhasil
+- GAGAL:
+  - status: ERROR
+  - data: pesan kesalahan
