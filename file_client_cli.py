@@ -84,6 +84,8 @@ def remote_upload(filename=""):
     
 def remote_delete(filename=""):
     try:
+        if filename == '':
+            return None
         command_str = f"DELETE {filename}"
         hasil = send_command(command_str)
         if hasil["status"] == "OK":
@@ -104,4 +106,4 @@ if __name__ == '__main__':
     # remote_get('donalbebek.jpg')
     # remote_get('rfc2616.pdf')
     # remote_delete('donalbebek.jpg')
-    # remote_delete('rfc2616.pdf')
+    remote_delete('rfc2616.pdf')
